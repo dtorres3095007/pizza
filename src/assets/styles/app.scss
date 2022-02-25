@@ -1,6 +1,7 @@
 @import './components/nav';
 @import './components/header';
 @import './components/pizza';
+@import './components/balance';
 
 html,body {
     margin: 0;
@@ -49,10 +50,9 @@ li,p,h1,h2,h3,h4,h5,h6,p,span {
         grid-template-columns: 1fr 3fr;
         grid-template-areas:
         "header  header"
-        "content content"
-        "sidebar sidebar"
-        "ad      ad"
-        "footer  footer";
+        "nav     nav"
+        "sidebar content"
+        "ad      footer";
     }
     nav ul {
         display: flex;
@@ -64,10 +64,10 @@ li,p,h1,h2,h3,h4,h5,h6,p,span {
     .wrapper {
         grid-template-columns: 1fr 4fr 1fr;
         grid-template-areas:
-        "header  header  header"
-        "content content sidebar"
-        "content content ad"
-        "footer  footer  footer"
+        "header header  header"
+        "nav    content sidebar"
+        "nav    content ad"
+        "footer footer  footer"
     }
 
     nav ul {

@@ -1,0 +1,39 @@
+
+.balance{
+    padding: 10px;
+    width: 250px;
+    height: 250px;
+    border: 1px solid rgb(236, 235, 235);
+    border-radius: 20px;
+
+    
+    .balance__icon{
+        width: 120px;
+        height: 120px;
+        margin: 0 auto;
+        background-color: white;
+        border-radius: 50%;
+        text-align: center;
+        img{
+            width: 120px;
+            height: 120px;
+
+        }
+    }
+    .balance__information{
+        margin-top: 20px;
+        .balance__title{
+            font-size: 30px;
+            font-weight: 500;
+            color: white;
+            margin: 0;
+        }
+        
+        .balance__price{
+            font-size: 25px;
+            color: white;
+            margin: 0;
+        }
+    }
+
+}
