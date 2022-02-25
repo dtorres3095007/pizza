@@ -38,3 +38,60 @@ export function Datapizza (){
     },
   ];
 }
+
+export function DataSales (){
+  return [
+    {
+      "image" : "https://www.pikpng.com/pngl/m/159-1591956_free-icons-png-user-icon-clipart.png",
+      "client" : "Andrea Menesesssssss",
+      "description" : "Pizza X3",
+      "price" : 59900,
+    },
+    {
+      "image" : "https://media-cdn.tripadvisor.com/media/photo-s/18/1a/d5/1e/casteloes.jpg",
+      "client" : "Damian Torres",
+      "description" : "Pizza X4",
+      "price" : 30000,
+    },
+  
+    {
+      "image" : "https://www.pikpng.com/pngl/m/159-1591956_free-icons-png-user-icon-clipart.png",
+      "client" : "Andrea Menesesssssss",
+      "description" : "Pizza X3",
+      "price" : 59900,
+    },
+    {
+      "image" : "https://media-cdn.tripadvisor.com/media/photo-s/18/1a/d5/1e/casteloes.jpg",
+      "client" : "Damian Torres",
+      "description" : "Pizza X4",
+      "price" : 30000,
+    },
+  
+    {
+      "image" : "https://www.pikpng.com/pngl/m/159-1591956_free-icons-png-user-icon-clipart.png",
+      "client" : "Andrea Menesesssssss",
+      "description" : "Pizza X3",
+      "price" : 59900,
+    },
+    {
+      "image" : "https://media-cdn.tripadvisor.com/media/photo-s/18/1a/d5/1e/casteloes.jpg",
+      "client" : "Damian Torres",
+      "description" : "Pizza X4",
+      "price" : 30000,
+    },
+  
+    {
+      "image" : "https://www.pikpng.com/pngl/m/159-1591956_free-icons-png-user-icon-clipart.png",
+      "client" : "Andrea Menesesssssss",
+      "description" : "Pizza X3",
+      "price" : 59900,
+    },
+    {
+      "image" : "https://media-cdn.tripadvisor.com/media/photo-s/18/1a/d5/1e/casteloes.jpg",
+      "client" : "Damian Torres",
+      "description" : "Pizza X4",
+      "price" : 30000,
+    },
+  
+  ];
+}
