@@ -1,7 +1,7 @@
 import React from "react";
 import Balance from "../components/Balance";
 import Header from "../components/Header";
-// import Nav from "../components/Nav";
+import Nav from "../components/Nav";
 import ShowPizza from "../containers/ShowPizza";
 
 import debit_card from "../assets/images/debit_card.png";
@@ -13,9 +13,10 @@ export default function Home(){
       <header className="main-head">
         <Header/>
       </header>
-      {/* <nav className="main-nav">
+      <div className="main-section"></div>
+      <nav className="main-nav">
         <Nav/>
-      </nav> */}
+      </nav>
       <article className="content">
         <ShowPizza/>
       </article>
