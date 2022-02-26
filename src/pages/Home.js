@@ -5,12 +5,14 @@ import Nav from "../components/Nav";
 import ShowPizza from "../containers/ShowPizza";
 
 import debit_card from "../assets/images/debit_card.png";
+import NavApp from "../components/NavApp";
 
 export default function Home(){
   return(
     <div className="body">
       <header className="body__head">
         <Header/>
+        <NavApp/>
       </header>
       <nav className="body__nav">
         <Nav/>
