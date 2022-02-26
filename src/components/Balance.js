@@ -1,22 +1,14 @@
-import React, {useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import Sale from "../components/Sales";
-import { DataSales, moveContentScroll } from "../Helper";
 
-export default function Balance({ image, title,price, color }){
 
-  useEffect(() => {
-    moveContentScroll("balance__sales");
-  },[]);
+export default function Balance({ image, title, price, color, render }){
+
 
   return(
     <div className="balance">
       <section className="balance__sales" id="balance__sales">
-        {     
-          DataSales().map(({image, description, client, price},i) =>{
-            return <Sale key={i} description={description} image={image} client={client} price={price}/>;
-          })
-        }
+        {render()}
       </section>
       <section className="balance__information"  style={{backgroundColor : color}}>
         <div className="balance__icon">
@@ -32,8 +24,9 @@ export default function Balance({ image, title,price, color }){
 }
 
 Balance.propTypes = {
-  image: PropTypes.object.isRequired,
+  image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
+  render: PropTypes.func.isRequired,
 };
