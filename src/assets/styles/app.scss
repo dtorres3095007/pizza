@@ -13,8 +13,12 @@ html,body {
     // overflow-x: hidden;
 }
 
-li,p,h1,h2,h3,h4,h5,h6,p,span {
+li,p,h1,h2,h3,h4,h5,h6,p,span,a {
     font-family: Montserrat;
+}
+
+a{
+    text-decoration: none;
 }
 
 .body__head {

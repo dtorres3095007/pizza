@@ -1,9 +1,14 @@
-import React from "react";
+import React, {useEffect } from "react";
 import PropTypes from "prop-types";
 import Sale from "../components/Sales";
-import { DataSales } from "../Helper";
+import { DataSales, moveContentScroll } from "../Helper";
 
 export default function Balance({ image, title,price, color }){
+
+  useEffect(() => {
+    moveContentScroll("balance__sales");
+  },[]);
+
   return(
     <div className="balance">
       <section className="balance__sales" id="balance__sales">

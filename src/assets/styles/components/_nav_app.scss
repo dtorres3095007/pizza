@@ -25,6 +25,7 @@
         z-index: 6;
         top: 0;
         right: 0;
+        
         button{
             background-color: white;
             text-decoration: none;
@@ -57,9 +58,12 @@
         }
         .nav-app__options{
             margin-top: 15px;
-            .nav-app__option{
-                width: 80%;
-                background-color: white;
+
+
+            .nav-app__option{  
+                cursor: pointer;              
+                width: 100%;
+                margin-top: 10px;
                 text-decoration: none;
                 border: none;
                 text-align: left;
