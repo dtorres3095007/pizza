@@ -8,6 +8,7 @@ html,body {
     margin: 0;
     padding: 0;
     width: 100%;
+    height: 100%;
     // overflow-x: hidden;
 }
 
@@ -15,7 +16,7 @@ li,p,h1,h2,h3,h4,h5,h6,p,span {
     font-family: Montserrat;
 }
 
-.main-head {
+.body__head {
     width: 100%;
     position: fixed;
     background-color: white;
@@ -23,84 +24,105 @@ li,p,h1,h2,h3,h4,h5,h6,p,span {
     grid-area: header;
 
 }
-.content {
-    margin-top: 100px;
+.body__content {
+    // margin-top: 100px;
     grid-area: content;
+    // height: 55%;
+    // overflow-y: auto;
 }
-.main-nav {
+.body__nav {
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     margin-top: 100px;
     left: 15px;
     grid-area: nav;
+    
 }
-.side {
+.body__side {
     margin-top: 100px;
     grid-area: sidebar;
 }
-.ad {
-    grid-area: ad;
-}
+
 .main-footer {
     grid-area: footer;
 }
 
-.wrapper {
+.body {
     display: grid;
     grid-gap: 20px;
     grid-template-areas:
         "header"
         "nav"
         "sidebar"
-        "ad"
         "content"
         "footer";
 }
 
+.body__title{
+    margin-left: 30px;
+    color: grey;
+    font-size: 18px;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+  
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+   
+::-webkit-scrollbar-thumb {
+    background: rgb(187, 187, 187); 
+}
+  
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
 @media (max-width: 699px) {
-    .wrapper {
+    .body {
         grid-template-columns: 100%;
         grid-template-areas:
         "header"
-        "content"
         "sidebar"
-        "ad"
+        "content"
         "footer"
     }
-    .main-nav{
+    .body__nav{
         display: none;
     }
 }
 
 
 @media (min-width: 700px) {
-    .wrapper {
+    .body {
         grid-template-columns: 50px 60% 28%;
         grid-template-areas:
         "header header  header"
-        "nav content sidebar"
-        "nav content ad"
+        "nav sidebar sidebar"
+        "nav content content"
         "footer footer  footer"
     }
 }
 
 @media (min-width: 1070px) {
-    .wrapper {
+    .body {
         grid-template-columns: 50px 75% 15%;
         grid-template-areas:
         "header header  header"
-        "nav content sidebar"
-        "nav content ad"
+        "nav sidebar sidebar"
+        "nav content content"
         "footer footer  footer"
     }
 }
 @media (min-width: 1200px) {
-    .wrapper {
+    .body {
         grid-template-columns: 50px 68% 25%;
         grid-template-areas:
         "header header  header"
-        "nav content sidebar"
-        "nav content ad"
+        "nav sidebar sidebar"
+        "nav content content"
         "footer footer  footer"
     }
 }

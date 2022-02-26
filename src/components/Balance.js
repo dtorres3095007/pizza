@@ -1,15 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Sale from "../components/Sales";
+import { DataSales } from "../Helper";
 
 export default function Balance({ image, title,price, color }){
   return(
-    <div className="balance" style={{backgroundColor : color}}>
-      <section className="balance__icon">
-        <img src={image} />
+    <div className="balance">
+      <section className="balance__sales" id="balance__sales">
+        {     
+          DataSales().map(({image, description, client, price},i) =>{
+            return <Sale key={i} description={description} image={image} client={client} price={price}/>;
+          })
+        }
       </section>
-      <section className="balance__information">
-        <p className="balance__title">{title}</p>
-        <p className="balance__price">${price}</p>
+      <section className="balance__information"  style={{backgroundColor : color}}>
+        <div className="balance__icon">
+          <img src={image} />
+        </div>
+        <div className="balance__description">
+          <p className="balance__title">{title}</p>
+          <p className="balance__price">${price}</p>
+        </div>
       </section>
     </div>
   );

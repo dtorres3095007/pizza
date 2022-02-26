@@ -5,28 +5,24 @@ import Nav from "../components/Nav";
 import ShowPizza from "../containers/ShowPizza";
 
 import debit_card from "../assets/images/debit_card.png";
-import ShowSales from "../containers/ShowSales";
 
 export default function Home(){
   return(
-    <div className="wrapper">
-      <header className="main-head">
+    <div className="body">
+      <header className="body__head">
         <Header/>
       </header>
-      <div className="main-section"></div>
-      <nav className="main-nav">
+      <nav className="body__nav">
         <Nav/>
       </nav>
-      <article className="content">
+      <article className="body__content">
+        <p className="body__title">Pizzas Disponibles</p>
         <ShowPizza/>
       </article>
-      <aside className="side">
+      <aside className="body__side">
+        <p className="body__title">Ventas Registradas</p>
         <Balance image={debit_card} title="Balance" price={50000} color="#f44336"/>
       </aside>
-      <div className="ad">
-        <ShowSales/>
-      </div>
-      <footer className="main-footer">The footer</footer>
     </div>
   );
 }
