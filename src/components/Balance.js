@@ -2,12 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 
 
-export default function Balance({ image, title, price, color, render }){
+export default function Balance({ image, title, price, color, render, id = "balance__sales" }){
 
 
   return(
     <div className="balance">
-      <section className="balance__sales" id="balance__sales">
+      <section className="balance__sales" id={id}>
         {render()}
       </section>
       <section className="balance__information"  style={{backgroundColor : color}}>
@@ -26,6 +26,7 @@ export default function Balance({ image, title, price, color, render }){
 Balance.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  id: PropTypes.string,
   color: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   render: PropTypes.func.isRequired,

@@ -11,9 +11,12 @@ import Sale from "../components/Sales";
 import { DataSales, moveContentScroll, Datapizza } from "../Helper";
 import { changeSelectPizza } from "../redux/actions/actGlobal";
 import FloatingActionBtn from "../components/FloatingActionBtn";
+import Modal from "../components/Modal";
+import AddSale from "../containers/AddSale";
 
 function Home({pizzaSelect, changeSelectPizza}){
   const [total, setTotal] = useState(0);
+  const [modalConfirm, setModalConfirm] = useState(false);
 
   useEffect(() => {
     moveContentScroll("balance__sales");
@@ -63,7 +66,7 @@ function Home({pizzaSelect, changeSelectPizza}){
                   name={name} 
                   price={price}
                   callback={(setCheck,check)=>{
-                    addPizzaBuy({ name, price, id, i});
+                    addPizzaBuy({ name, price, id, i, image});
                     setCheck(!check);
                     // let listCheck = reset;
                     // listCheck.push(()=>{
@@ -102,7 +105,31 @@ function Home({pizzaSelect, changeSelectPizza}){
           }
         />
       </aside>
-      <FloatingActionBtn callback={()=>{}} color="teal"  type="" title={`Comprar por $${total}`}/>
+      {
+        total > 0 
+        &&
+        <FloatingActionBtn 
+          callback={()=>{
+            moveContentScroll("balance_sales_confirm");
+            setModalConfirm(true);
+          }}
+          color="teal"  
+          type="" 
+          title={`Comprar por $${total}`}
+        /> 
+      }
+      <Modal 
+        title="Confirmar Compra" 
+        callback={()=> setModalConfirm(false)} 
+        container={()=>{
+          return <AddSale  
+            callback={()=> alert("submit")}
+            total={total}
+            pizzaSelect={pizzaSelect}
+          />;
+        }} 
+        open={modalConfirm}
+      />
     </div>
   );
 }
