@@ -7,14 +7,14 @@ import FloatingActionBtn from "../components/FloatingActionBtn";
 
 export default function AddSale({callback, pizzaSelect, total}){
 
-  const [name, setName] = useState("");
+  const [client, setClient] = useState("");
   const [phone, setPhone] = useState("");
-  const [fecha, setFecha] = useState("");
+  const [date, setDate] = useState("");
 
   const resetForm = ()=>{
     setPhone("");
-    setFecha("");
-    setName("");
+    setDate("");
+    setClient("");
   };
 
   return(
@@ -47,8 +47,7 @@ export default function AddSale({callback, pizzaSelect, total}){
       </section>
       <form
         onSubmit={(e)=> {
-          let image = document.getElementById("image_pizza").files[0];
-          callback({name,image,phone},resetForm);
+          callback({client,phone, date, price : total},resetForm);
           e.preventDefault();
         }
         }>
@@ -56,11 +55,11 @@ export default function AddSale({callback, pizzaSelect, total}){
         <label className="container-add-pizza__input">
           Cliente 
           <input 
-            value={name}
+            value={client}
             type="text" 
             name="name" 
             placeholder="Ingresa el nombre"
-            onChange={({ target: { value } }) => setName(value)}
+            onChange={({ target: { value } }) => setClient(value)}
             required={true}
           /> 
         </label>
@@ -78,18 +77,18 @@ export default function AddSale({callback, pizzaSelect, total}){
         <label className="container-add-pizza__input">
           Fecha
           <input 
-            value={fecha}
+            value={date}
             type="date" 
             name="phone" 
             placeholder="Seleccione Fecha"
-            onChange={({ target: { value } }) => setFecha(value)}
+            onChange={({ target: { value } }) => setDate(value)}
             required={true}
           />    
         </label>
         <FloatingActionBtn 
           callback={()=>{}}
           color="teal"  
-          type="" 
+          type="submit" 
           title={"Aceptar"}
         />
       </form>

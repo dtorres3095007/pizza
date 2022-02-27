@@ -6,10 +6,11 @@ import Header from "../components/Header";
 import Nav from "../components/Nav";
 import Pizza from "../components/Pizza";
 import debit_card from "../assets/images/debit_card.png";
+import man from "../assets/images/man.png";
 import NavApp from "../components/NavApp";
 import Sale from "../components/Sales";
 import Loading from "../components/Loading";
-import { DataSales, moveContentScroll, getSendData, showMessage, SERVER_BACK } from "../Helper";
+import {  moveContentScroll, getSendData, showMessage, SERVER_BACK,showError } from "../Helper";
 import { changeSelectPizza } from "../redux/actions/actGlobal";
 import FloatingActionBtn from "../components/FloatingActionBtn";
 import Modal from "../components/Modal";
@@ -17,7 +18,9 @@ import AddSale from "../containers/AddSale";
 
 function Home({pizzaSelect, changeSelectPizza}){
   const [total, setTotal] = useState(0);
-  const [datapizza, setDatapizza] = useState([]);
+  const [totalSale, setTotalSale] = useState(0);
+  const [dataPizza, setDatapizza] = useState([]);
+  const [dataSale, setSale] = useState([]);
   const [modalConfirm, setModalConfirm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [reset, setReset] = useState([]);
@@ -27,20 +30,52 @@ function Home({pizzaSelect, changeSelectPizza}){
   useEffect(() => {
     moveContentScroll("balance__sales");
     getPizza();
+    getSale();
   },[]);
 
   const getPizza = async ()=>{
     setIsLoading(true);
     getSendData("/pizza","GET",null, async (error, estado, resp) => {
-      console.log("llama");
       setIsLoading(false);
       if (estado === 200) {
-        console.log(resp);
         setDatapizza(resp);
       } else {
-        showMessage.fire({ icon: "info", title: "ERROR"});
+        showMessage.fire({ icon: "info", title: "Error al cargar las Pizza"});
       }});
   };
+
+  const getSale = async ()=>{
+    setIsLoading(true);
+    getSendData("/sale","GET",null, async (error, estado, resp) => {
+      setIsLoading(false);
+      if (estado === 200) {
+        setSale(resp);
+        calculateValueSale(resp);
+      } else {
+        showMessage.fire({ icon: "info", title: "Error al cargar las ventas"});
+      }});
+  };
+
+  const addSale = async (data,resetForm)=>{
+    setIsLoading(true);
+    data.pizza = pizzaSelect;
+    console.log(data);
+    getSendData("/sale/add","post",data, async (error, estado, resp) => {
+      setIsLoading(false);
+      if (estado === 200) {
+        showMessage.fire({ icon: "success", title: resp.title });
+        resetForm();
+        setModalConfirm(false);
+        setTotal(0);
+        changeSelectPizza([]);
+        await reset.map((callback)=>callback());
+        setReset([]);
+        getSale();
+      } else {
+        showMessage.fire({ icon: "info", title: resp.title ? resp.title : showError(resp) });
+      }});
+  };
+
 
   const addPizzaBuy = (data)=>{
     let add = pizzaSelect;
@@ -64,6 +99,14 @@ function Home({pizzaSelect, changeSelectPizza}){
     setTotal(total);
   };
 
+  const calculateValueSale = async (resp)=>{
+    let total = 0;
+    await resp.map(({price})=>{
+      total = total + price; 
+    }); 
+    setTotalSale(total);
+  };
+
   return(
     <div className="body">
       {isLoading && <Loading/>}
@@ -78,7 +121,7 @@ function Home({pizzaSelect, changeSelectPizza}){
         <p className="body__title">Selecciona Mypizza a vender</p>
         <div className="body__pizza">
           {     
-            datapizza.map(({image, description, name, price, id},i) =>{
+            dataPizza.map(({image, description, name, price, id},i) =>{
               price = price + 10000;
               image = `${SERVER_BACK}${image}`;
               return (
@@ -109,16 +152,16 @@ function Home({pizzaSelect, changeSelectPizza}){
         <Balance 
           image={debit_card} 
           title="Ventas" 
-          price={50000} 
+          price={totalSale} 
           color="#f44336"
           render={
             ()=>{     
-              return DataSales().map(({image, description, client, price},i) =>{
+              return dataSale.map(({client, price, total},i) =>{
                 return (
                   <Sale 
                     key={i} 
-                    description={description} 
-                    image={image} 
+                    description={`Mypizza x${total}`} 
+                    image={man} 
                     client={client} 
                     price={price} 
                     callback={()=>true}
@@ -146,7 +189,7 @@ function Home({pizzaSelect, changeSelectPizza}){
         callback={()=> setModalConfirm(false)} 
         container={()=>{
           return <AddSale  
-            callback={()=> alert("submit")}
+            callback={addSale}
             total={total}
             pizzaSelect={pizzaSelect}
           />;
