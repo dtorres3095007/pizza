@@ -15,16 +15,16 @@ import tomate from "./assets/images/tomate.png";
 import tocino from "./assets/images/tocino.png";
 import pepperoni from "./assets/images/pepperoni.png";
 
-const API_V1 = "http://127.0.0.1:8000/api/v1.0";
+export const SERVER_BACK = "http://127.0.0.1:8000";
+const API_V1 = `${SERVER_BACK}/api/v1.0`;
 
 export const getSendData = (url,method ,data , callback) => {
-  fetch(`${API_V1}${url}`, {
+  let headers = {
     method,
-    body:  JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  }).then(async response => {
+    headers: { "Content-Type": "application/json"}
+  };
+  if(data) headers.body =  data && JSON.stringify(data);
+  fetch(`${API_V1}${url}`, headers).then(async response => {
     const estado = response.status;
     const resp = await response.json();
     callback(null, estado, resp);

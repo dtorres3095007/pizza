@@ -8,7 +8,8 @@ import Pizza from "../components/Pizza";
 import debit_card from "../assets/images/debit_card.png";
 import NavApp from "../components/NavApp";
 import Sale from "../components/Sales";
-import { DataSales, moveContentScroll, Datapizza } from "../Helper";
+import Loading from "../components/Loading";
+import { DataSales, moveContentScroll, getSendData, showMessage, SERVER_BACK } from "../Helper";
 import { changeSelectPizza } from "../redux/actions/actGlobal";
 import FloatingActionBtn from "../components/FloatingActionBtn";
 import Modal from "../components/Modal";
@@ -16,11 +17,30 @@ import AddSale from "../containers/AddSale";
 
 function Home({pizzaSelect, changeSelectPizza}){
   const [total, setTotal] = useState(0);
+  const [datapizza, setDatapizza] = useState([]);
   const [modalConfirm, setModalConfirm] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [reset, setReset] = useState([]);
+
+
 
   useEffect(() => {
     moveContentScroll("balance__sales");
+    getPizza();
   },[]);
+
+  const getPizza = async ()=>{
+    setIsLoading(true);
+    getSendData("/pizza","GET",null, async (error, estado, resp) => {
+      console.log("llama");
+      setIsLoading(false);
+      if (estado === 200) {
+        console.log(resp);
+        setDatapizza(resp);
+      } else {
+        showMessage.fire({ icon: "info", title: "ERROR"});
+      }});
+  };
 
   const addPizzaBuy = (data)=>{
     let add = pizzaSelect;
@@ -46,6 +66,7 @@ function Home({pizzaSelect, changeSelectPizza}){
 
   return(
     <div className="body">
+      {isLoading && <Loading/>}
       <header className="body__head">
         <Header/>
         <NavApp/>
@@ -57,7 +78,9 @@ function Home({pizzaSelect, changeSelectPizza}){
         <p className="body__title">Selecciona Mypizza a vender</p>
         <div className="body__pizza">
           {     
-            Datapizza().map(({image, description, name, price, id},i) =>{
+            datapizza.map(({image, description, name, price, id},i) =>{
+              price = price + 10000;
+              image = `${SERVER_BACK}${image}`;
               return (
                 <Pizza 
                   key={i} 
@@ -68,11 +91,11 @@ function Home({pizzaSelect, changeSelectPizza}){
                   callback={(setCheck,check)=>{
                     addPizzaBuy({ name, price, id, i, image});
                     setCheck(!check);
-                    // let listCheck = reset;
-                    // listCheck.push(()=>{
-                    //   setCheck(false);
-                    // });
-                    // setReset(listCheck);
+                    let listCheck = reset;
+                    listCheck.push(()=>{
+                      setCheck(false);
+                    });
+                    setReset(listCheck);
                   }}
                 />
               );
@@ -130,6 +153,7 @@ function Home({pizzaSelect, changeSelectPizza}){
         }} 
         open={modalConfirm}
       />
+     
     </div>
   );
 }
