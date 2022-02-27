@@ -73,7 +73,7 @@ export default function MyPizza(){
         </section>
       </article>
       <aside className="body__side">
-        <p className="body__title">Seleccione Ingredientes adicionales</p>
+        <p className="body__title">Presiona dos veces para seleccionar</p>
         <Balance 
           image={pizza} 
           title="Total" 

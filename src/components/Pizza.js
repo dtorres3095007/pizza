@@ -1,9 +1,12 @@
-import React from "react";
+
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-export default function Pizza({ image, name, description,price }){
+export default function Pizza({ image, name, description,price, callback }){
+  const [check, setCheck] = useState(false);
+
   return(
-    <div className="pizza">
+    <div className="pizza" onClick={()=> callback(setCheck,check)} style={{backgroundColor : check ? "#FFF1D1" : "white"}}>
       <section className="pizza__image">
         <img src={image} />
       </section>
@@ -12,7 +15,6 @@ export default function Pizza({ image, name, description,price }){
         <p className="pizza__description">{description}</p>
         <p className="pizza__price">${price}</p>
       </section>
-      <section className="pizza__actions"></section>
     </div>
   );
 }
@@ -22,4 +24,5 @@ Pizza.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
+  callback: PropTypes.func.isRequired,
 };

@@ -5,7 +5,7 @@ export default function Sales({ image, client, description, price, callback }){
   const [check, setCheck] = useState(false);
 
   return(
-    <div onClick={()=> callback(setCheck,check)} className="sales" style={{backgroundColor : check ? "#FFF1D1" : "white"}}>
+    <div onDoubleClick={()=> callback(setCheck,check)} className="sales" style={{backgroundColor : check ? "#FFF1D1" : "white"}}>
       <section className="sales__image">
         <img src={image} />
       </section>

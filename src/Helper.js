@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import jamon from "./assets/images/jamon.png";
 import queso from "./assets/images/queso.png";
 import salchicha from "./assets/images/salchicha.png";
@@ -13,9 +14,23 @@ import cebolla from "./assets/images/cebolla.png";
 import tomate from "./assets/images/tomate.png";
 import tocino from "./assets/images/tocino.png";
 import pepperoni from "./assets/images/pepperoni.png";
-import Swal from "sweetalert2";
 
 const API_V1 = "http://127.0.0.1:8000/api/v1.0";
+
+export const getSendData = (url,method ,data , callback) => {
+  fetch(`${API_V1}${url}`, {
+    method,
+    body:  JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(async response => {
+    const estado = response.status;
+    const resp = await response.json();
+    callback(null, estado, resp);
+  }).catch(error => callback(error));
+};
+
 
 export  const sendDataForm = (url,method,data,callback) => {
   fetch(`${API_V1}${url}`, {

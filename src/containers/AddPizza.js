@@ -60,7 +60,7 @@ export default function AddPizza({callback}){
             required={true}
           /> 
         </label>
-        <FloatingActionBtn color="teal" icon={add} type="submit"/>
+        <FloatingActionBtn callback={()=>{}} color="teal" icon={add} type="submit" title="Agregar MyPizza"/>
       </form>
       <section className="container-add-pizza__image">
         <img src={image_add}/>
