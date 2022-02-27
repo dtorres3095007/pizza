@@ -1,4 +1,4 @@
-import React, {useEffect } from "react";
+import React, {useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import {  connect } from "react-redux";
 import Balance from "../components/Balance";
@@ -6,7 +6,6 @@ import Header from "../components/Header";
 import Nav from "../components/Nav";
 import Pizza from "../components/Pizza";
 import debit_card from "../assets/images/debit_card.png";
-import shopping_cart from "../assets/images/shopping_cart.png";
 import NavApp from "../components/NavApp";
 import Sale from "../components/Sales";
 import { DataSales, moveContentScroll, Datapizza } from "../Helper";
@@ -14,6 +13,8 @@ import { changeSelectPizza } from "../redux/actions/actGlobal";
 import FloatingActionBtn from "../components/FloatingActionBtn";
 
 function Home({pizzaSelect, changeSelectPizza}){
+  const [total, setTotal] = useState(0);
+
   useEffect(() => {
     moveContentScroll("balance__sales");
   },[]);
@@ -25,13 +26,20 @@ function Home({pizzaSelect, changeSelectPizza}){
       add.push(data);
       changeSelectPizza(add);
     }else{
-      let del = add.map(function(e) { return e.id; }).indexOf(data.code);
+      let del = add.map(function(e) { return e.id; }).indexOf(data.id);
       add.splice(del,1);
       changeSelectPizza(add);
     }
-    // calculateValue();
+    calculateValue();
   };
 
+  const calculateValue = async ()=>{
+    let total = 0;
+    await pizzaSelect.map(({price})=>{
+      total = total + price;
+    });
+    setTotal(total);
+  };
 
   return(
     <div className="body">
@@ -46,7 +54,7 @@ function Home({pizzaSelect, changeSelectPizza}){
         <p className="body__title">Selecciona Mypizza a vender</p>
         <div className="body__pizza">
           {     
-            Datapizza().map(({image, description, name, price,id},i) =>{
+            Datapizza().map(({image, description, name, price, id},i) =>{
               return (
                 <Pizza 
                   key={i} 
@@ -71,6 +79,7 @@ function Home({pizzaSelect, changeSelectPizza}){
       </article>
       <aside className="body__side">
         <p className="body__title">Ventas Registradas</p>
+
         <Balance 
           image={debit_card} 
           title="Ventas" 
@@ -93,7 +102,7 @@ function Home({pizzaSelect, changeSelectPizza}){
           }
         />
       </aside>
-      <FloatingActionBtn callback={()=>{}} color="teal" icon={shopping_cart} type="" title="Comprar MyPizza"/>
+      <FloatingActionBtn callback={()=>{}} color="teal"  type="" title={`Comprar por $${total}`}/>
     </div>
   );
 }

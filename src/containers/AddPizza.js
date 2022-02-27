@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import image_add from "../assets/images/image_add.png";
 import FloatingActionBtn from "../components/FloatingActionBtn";
-import add from "../assets/images/add.png";
 
 export default function AddPizza({callback}){
 
@@ -60,7 +59,7 @@ export default function AddPizza({callback}){
             required={true}
           /> 
         </label>
-        <FloatingActionBtn callback={()=>{}} color="teal" icon={add} type="submit" title="Agregar MyPizza"/>
+        <FloatingActionBtn callback={()=>{}} color="teal"  type="submit" title="Agregar MyPizza"/>
       </form>
       <section className="container-add-pizza__image">
         <img src={image_add}/>
