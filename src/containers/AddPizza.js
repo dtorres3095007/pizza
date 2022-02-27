@@ -1,12 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import image_add from "../assets/images/image_add.png";
-export default function AddPizza(){
+import FloatingActionBtn from "../components/FloatingActionBtn";
+import add from "../assets/images/add.png";
+
+export default function AddPizza({callback}){
+
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [, setImage] = useState("");
+
+  const resetForm = ()=>{
+    document.getElementById("image_pizza").value = "";
+    setImage("");
+    setDescription("");
+    setName("");
+  };
+
   return(
     <div className="container-add-pizza">
-      <form className="container-add-pizza__form">
-        <label className="container-add-pizza__input">Nombre <input type="text" name="name" placeholder="Ingresa el nombre"/> </label>
-        <label className="container-add-pizza__input">Descripción <input type="text" name="description" placeholder="Ingresa la descripción"/> </label>
-        <label className="container-add-pizza__input">Imagen <input type="file" name="image" /> </label>
+      <form className="container-add-pizza__form" 
+        onSubmit={(e)=> {
+          let image = document.getElementById("image_pizza").files[0];
+          callback({name,image,description},resetForm);
+          e.preventDefault();
+        }
+        }>
+        <label className="container-add-pizza__input">
+          Nombre 
+          <input 
+            value={name}
+            type="text" 
+            name="name" 
+            placeholder="Ingresa el nombre"
+            onChange={({ target: { value } }) => setName(value)}
+            required={true}
+          /> 
+        </label>
+        <label className="container-add-pizza__input">
+          Descripción
+          <input 
+            value={description}
+            type="text" 
+            name="description" 
+            placeholder="Ingresa la descripción"
+            onChange={({ target: { value } }) => setDescription(value)}
+            required={true}
+          /> 
+                 
+        </label>
+        <label className="container-add-pizza__input">
+          Imagen 
+          <input 
+            accept="image/*"
+            type="file" 
+            name="image"
+            id="image_pizza"
+            onChange={({ target: { value } }) => setImage(value)} 
+            required={true}
+          /> 
+        </label>
+        <FloatingActionBtn color="teal" icon={add} type="submit"/>
       </form>
       <section className="container-add-pizza__image">
         <img src={image_add}/>
@@ -15,3 +69,7 @@ export default function AddPizza(){
   );
 }
 
+
+AddPizza.propTypes = {
+  callback: PropTypes.func.isRequired,
+};

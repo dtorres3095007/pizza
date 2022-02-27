@@ -13,6 +13,56 @@ import cebolla from "./assets/images/cebolla.png";
 import tomate from "./assets/images/tomate.png";
 import tocino from "./assets/images/tocino.png";
 import pepperoni from "./assets/images/pepperoni.png";
+import Swal from "sweetalert2";
+
+const API_V1 = "http://127.0.0.1:8000/api/v1.0";
+
+export  const sendDataForm = (url,method,data,callback) => {
+  fetch(`${API_V1}${url}`, {
+    method,
+    cache: "no-cache",
+    mode: "cors",
+    body: data,
+  }).then(async response => {
+    const estado = response.status;
+    const resp = await response.json();
+    callback(null, estado, resp);
+  }).catch(error => callback(error));
+};
+
+export const createFormData = (data) => {
+  return new Promise((resolve) => {
+    let key = Object.keys(data);
+    let formData = new FormData();
+    key.forEach((key) => formData.append(key, data[key]));
+    resolve(formData);
+  });
+};
+
+
+
+export const showMessage = Swal.mixin({
+  toast: true,
+  position: "top",
+  showConfirmButton: false,
+  timer: 5000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  }
+});
+
+export const showError = (errores) => {
+  for (var k in errores) {
+    let r = errores[k];
+    let mensaje = "";
+    r.forEach((element) => {
+      mensaje = `${mensaje} ${element}`;
+    });
+    return `${k} : ${mensaje}`;
+  }
+};
 
 export function Datapizza (){
   return [
@@ -128,112 +178,127 @@ export function DataSales (){
 export function DataIngredients (){
   return [
     {
-      "id" : 1,
+      "code" : 1,
       "image" : queso,
-      "client" : "Queso",
+      "name" : "Queso",
       "description" : "Disponible",
       "price" : 3000,
+      "check" : false
     },
     {
-      "id" : 2,
+      "code" : 2,
       "image" : jamon,
-      "client" : "Jamón",
+      "name" : "Jamón",
       "description" : "Disponible",
       "price" : 3000,
+      "check" : false
     },
   
     {
-      "id" : 3,
+      "code" : 3,
       "image" : champinon,
-      "client" : "Champiñones",
+      "name" : "Champiñones",
       "description" : "Disponible",
       "price" : 3000,
+      "check" : false
     },
     {
-      "id" : 4,
+      "code" : 4,
       "image" :salchicha,
-      "client" : "Salchichas",
+      "name" : "Salchichas",
       "description" : "Disponible",
       "price" : 3000,
+      "check" : false
     },
   
     {
-      "id" : 5,
+      "code" : 5,
       "image" : atun,
-      "client" : "Atún",
+      "name" : "Atún",
       "description" : "Disponible",
       "price" : 3000,
+      "check" : false
     },
   
     {
-      "id" : 6,
+      "code" : 6,
       "image" : pollo,
-      "client" : "Pollo",
+      "name" : "Pollo",
       "description" : "Disponible",
       "price" : 5000,
+      "check" : false
     },
     {
-      "id" : 7,
+      "code" : 7,
       "image" : pimiento,
-      "client" : "Pimientos",
+      "name" : "Pimientos",
       "description" : "Disponible",
       "price" : 3000,
+      "check" : false
     },
     {
-      "id" : 8,
+      "code" : 8,
       "image" : salami,
-      "client" : "Salami",
+      "name" : "Salami",
       "description" : "Disponible",
       "price" : 3000,
+      "check" : false
     },
     {
-      "id" : 9,
+      "code" : 9,
       "image" : pina,
-      "client" : "Piña",
+      "name" : "Piña",
       "description" : "Disponible",
       "price" : 3000,
+      "check" : false
     },
     {
-      "id" : 10,
+      "code" : 10,
       "image" : carne,
-      "client" : "Carne",
+      "name" : "Carne",
       "description" : "Disponible",
       "price" : 3000,
+      "check" : false
     },
     {
-      "id" : 11,
+      "code" : 11,
       "image" : chorizo,
-      "client" : "Chorizo",
+      "name" : "Chorizo",
       "description" : "Disponible",
       "price" : 3000,
+      "check" : false
     },
     {
-      "id" : 12,
+      "code" : 12,
       "image" : cebolla,
-      "client" : "Cebolla",
+      "name" : "Cebolla",
       "description" : "Disponible",
       "price" : 3000,
+      "check" : false
     },
     {
-      "id" : 13,
+      "code" : 13,
       "image" : tomate,
-      "client" : "Tomate",
+      "name" : "Tomate",
       "description" : "Disponible",
       "price" : 3000,
+      "check" : false
     },
     {
-      "id" : 14,
+      "code" : 14,
       "image" : tocino,
-      "client" : "Tocino",
+      "name" : "Tocino",
       "description" : "Disponible",
       "price" : 3000,
+      "check" : false
     },
     {
-      "id" : 15,
+      "code" : 15,
       "image" : pepperoni,
-      "client" : "Pepperoni",
+      "name" : "Pepperoni",
       "description" : "Disponible",
       "price" : 4500,
+      "check" : false
     },
   
   ];

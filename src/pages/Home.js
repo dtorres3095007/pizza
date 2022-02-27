@@ -38,7 +38,7 @@ export default function Home(){
           render={
             ()=>{     
               return DataSales().map(({image, description, client, price},i) =>{
-                return <Sale key={i} description={description} image={image} client={client} price={price}/>;
+                return <Sale key={i} description={description} image={image} client={client} price={price} callback={()=>true}/>;
               });
             }
           }

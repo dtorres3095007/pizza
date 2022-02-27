@@ -2,14 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 
 
-export default function FloatingActionBtn({ icon, callback,color }){
+export default function FloatingActionBtn({ icon,color,type }){
   return(
-    <button className="button-floating" onClick={callback} style={{backgroundColor : color}}> <img src={icon} /></button>
+    <button type={type} className="button-floating"  style={{backgroundColor : color}}> <img src={icon} /></button>
   );
 }
 
 FloatingActionBtn.propTypes = {
   icon: PropTypes.string.isRequired,
-  callback: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
 };

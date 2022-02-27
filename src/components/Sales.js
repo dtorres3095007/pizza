@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-export default function Sales({ image, client, description, price }){
+export default function Sales({ image, client, description, price, callback }){
+  const [check, setCheck] = useState(false);
+
   return(
-    <div className="sales">
+    <div onClick={()=> callback(setCheck,check)} className="sales" style={{backgroundColor : check ? "#FFF1D1" : "white"}}>
       <section className="sales__image">
         <img src={image} />
       </section>
@@ -19,6 +21,7 @@ export default function Sales({ image, client, description, price }){
 
 Sales.propTypes = {
   image: PropTypes.string.isRequired,
+  callback: PropTypes.func.isRequired,
   client: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
