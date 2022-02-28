@@ -10,10 +10,6 @@ export default function Header(){
           <li> MyPizza</li>
         </ul>
       </section>
-      <section className="header__input">
-        <input placeholder="Buscar" />
-      </section>
-
     </div>
   );
 }

@@ -1,9 +1,12 @@
-import React from "react";
+import React, {useEffect } from "react";
 import PropTypes from "prop-types";
-
+import {  moveContentScroll} from "../Helper";
 
 export default function Balance({ image, title, price, color, render, id = "balance__sales" }){
 
+  useEffect(() => {
+    moveContentScroll(id);
+  },[]);
 
   return(
     <div className="balance">

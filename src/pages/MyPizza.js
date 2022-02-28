@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from "react";
+import React, {useState } from "react";
 import Header from "../components/Header";
 import Nav from "../components/Nav";
 import NavApp from "../components/NavApp";
@@ -6,16 +6,15 @@ import Balance from "../components/Balance";
 import pizza from "../assets/images/pizza.png";
 import AddPizza from "../containers/AddPizza";
 import Sale from "../components/Sales";
-import { DataIngredients, moveContentScroll, createFormData, sendDataForm, showMessage, showError } from "../Helper";
+import { DataIngredients, createFormData, sendDataForm, showMessage, showError } from "../Helper";
+import Loading from "../components/Loading";
 
 export default function MyPizza(){
   const [ingredientsAdd, setIngredientsAdd] = useState([]);
   const [total, setTotal] = useState(10000);
   const [reset, setReset] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    moveContentScroll("balance__sales");
-  },[]);
 
   const addIngredients = (data)=>{
     let add = ingredientsAdd;
@@ -42,7 +41,9 @@ export default function MyPizza(){
   const addPizza = async (data,resetForm)=>{
     data.ingredients = JSON.stringify(ingredientsAdd);
     let add = await createFormData(data);
+    setIsLoading(true);
     sendDataForm("/pizza/add","post",add, async (error, estado, resp) => {
+      setIsLoading(false);
       if (estado === 200) {
         showMessage.fire({ icon: "success", title: resp.title });
         resetForm();
@@ -57,9 +58,9 @@ export default function MyPizza(){
 
   return(
     <div className="body">
+      {isLoading && <Loading/>}
       <header className="body__head">
         <Header/>
-        <NavApp/>
       </header>
       <nav className="body__nav">
         <Nav/>
@@ -105,6 +106,7 @@ export default function MyPizza(){
           }
         />
       </aside>
+      <NavApp/>
     </div>
   );
 }

@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-export default function Pizza({ image, name, description,price, callback }){
-  const [check, setCheck] = useState(false);
+export default function Pizza({ image, name, description,price, callback, initial = false }){
+  const [check, setCheck] = useState(initial);
 
   return(
     <div className="pizza" onClick={()=> callback(setCheck,check)} style={{backgroundColor : check ? "#FFF1D1" : "white"}}>
@@ -25,4 +25,5 @@ Pizza.propTypes = {
   description: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   callback: PropTypes.func.isRequired,
+  initial: PropTypes.bool,
 };
