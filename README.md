@@ -47,6 +47,9 @@ redux (Controlar el estado global de algunas variables)
 ```bash
 router ( Establecer rutas y Navegación)
 ```
+```bash
+Jest ( Pruebas de renderización de los componente)
+```
 
 
 
