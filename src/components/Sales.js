@@ -7,7 +7,7 @@ export default function Sales({ image, client, description, price, callback, sho
   const [check, setCheck] = useState(false);
 
   return(
-    <div className="sales" style={{backgroundColor : check ? "#FFF1D1" : "white"}}>
+    <div className="sales" style={{backgroundColor : check ? "#FFF1D1" : "white"}} data-testid="sale-1">
       <section className="sales__image">
         <img src={image} />
       </section>

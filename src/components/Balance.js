@@ -9,7 +9,7 @@ export default function Balance({ image, title, price, color, render, id = "bala
   },[]);
 
   return(
-    <div className="balance">
+    <div className="balance" data-testid="balance-1">
       <section className="balance__sales" id={id}>
         {render()}
       </section>

@@ -25,7 +25,7 @@ export default function Pizza({ id,image, name, description,price, callback, ini
   };
 
   return(
-    <div className="pizza"  style={{backgroundColor : check ? "#FFF1D1" : "white"}}>
+    <div className="pizza"  style={{backgroundColor : check ? "#FFF1D1" : "white"}} data-testid="pizza-1">
       <section className="pizza__image">
         <img src={image} />
       </section>
@@ -38,7 +38,6 @@ export default function Pizza({ id,image, name, description,price, callback, ini
         </button>
       </section>
       <section className="pizza__detail" >
-        {/* <span className="pizza__close" onClick={()=> setShow(false)}>X</span> */}
         <p className="pizza__title">{name}</p>
         { show ?   <p className="pizza__ingredients">{ingredients}</p> : <p onClick={getPizza}>Ver Ingredientes</p>}
       </section>
