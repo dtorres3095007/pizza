@@ -1,6 +1,6 @@
 # Pizza
 
-Antes de iniciar se debe instalar npm [npm](https://nodejs.org/es/download/).
+Antes de iniciar se debe instalar [npm](https://nodejs.org/es/download/).
 
 ## Configuración
 
@@ -17,7 +17,7 @@ Entrar a la carpeta del proyecto
 ```bash
 cd pizza
 ```
-then
+entonces
 
 ```bash
 npm install
@@ -30,12 +30,23 @@ npm start
 ```
 #### 3 ) Revisar aplicación
 
-go to http://localhost:3000/
+ir a http://localhost:3000/
 
 
 #### Librerias utilizadas
 
+```bash
 sass (Manejar mis hojas de estilo)
+```
+```bash
 sweetalert2 (Mostrar mensajes)
+```
+```bash
 redux (Controlar el estado global de algunas variables)
+```
+```bash
 router ( Establecer rutas y Navegación)
+```
+
+
+
