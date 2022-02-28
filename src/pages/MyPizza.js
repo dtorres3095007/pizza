@@ -85,6 +85,7 @@ export default function MyPizza(){
               return DataIngredients().map(({image, description, name, price, code},i) =>{
                 return( 
                   <Sale 
+                    show={true}
                     key={i}
                     description={description} 
                     image={image} 
