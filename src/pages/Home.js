@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import Nav from "../components/Nav";
 import Pizza from "../components/Pizza";
 import debit_card from "../assets/images/debit_card.png";
-import menu from "../assets/images/menu.png";
+import image_add from "../assets/images/image_add.png";
 import man from "../assets/images/man.png";
 import shopping_cart from "../assets/images/shopping_cart.png";
 import NavApp from "../components/NavApp";
@@ -32,6 +32,7 @@ function Home({pizzaSelect, changeSelectPizza}){
   const [reset, setReset] = useState([]);
 
   useEffect(() => {
+
     getPizza();
     getSale();
  
@@ -42,6 +43,7 @@ function Home({pizzaSelect, changeSelectPizza}){
     getSendData("/pizza","GET",null, async (error, estado, resp) => {
       setIsLoading(false);
       if (estado === 200) {
+        if(resp.length == 0) showMessageInit();
         setDatapizza(resp);
         changeSelectPizza([]);
       } else {
@@ -122,6 +124,26 @@ function Home({pizzaSelect, changeSelectPizza}){
     setTotalSale(total);
   };
 
+  const showMessageInit = () => {
+    
+    showMessage.fire({
+      title: "MyPizza",
+      text : "Bienvenido, para iniciar debes registrar pizzas.",
+      showCancelButton: true,
+      showConfirmButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, agregar",
+      cancelButtonText : "No, cerrar",
+      timer: 100000,
+      timerProgressBar: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.open("/pizza","_self");
+      } 
+    });
+  };
+
 
 
   return(
@@ -136,7 +158,7 @@ function Home({pizzaSelect, changeSelectPizza}){
       </nav>
       <article className="body__content">
         <p className="body__title">Selecciona Mypizza a vender</p>
-        { dataPizza.length == 0 ? <Empty image={menu} title='Aun no tienes pizzas guardadas.'/> : <div className="body__pizza">
+        { dataPizza.length == 0 ? <Empty image={image_add} title='Aun no tienes pizzas guardadas.'/> : <div className="body__pizza">
           {     
             dataPizza.map(({image, description, name, price, id},i) =>{
               price = price + 10000;

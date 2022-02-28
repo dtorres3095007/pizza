@@ -67,14 +67,14 @@ export default function MyPizza(){
       </nav>
       <article className="body__content">
         <div className="body__title">
-          <p>Ingresa la siguiente información</p>
+          <p>2) Ingresa información de la pizza</p>
         </div>
         <section className="body__content-form">
           <AddPizza callback={addPizza}/>
         </section>
       </article>
       <aside className="body__side">
-        <p className="body__title">Selecciona ingredientes</p>
+        <p className="body__title">1) Selecciona ingredientes</p>
         <Balance 
           image={pizza} 
           title="Total" 
