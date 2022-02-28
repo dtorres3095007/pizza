@@ -14,9 +14,14 @@ export default function NavApp(){
       <section className="nav-app__btn">
         <button onClick={()=> setShow(!show)}><img  src={show ? close : menu}/></button>
       </section>
-      {
-        show &&
-      <section className="nav-app__menu">
+      
+      <section className="nav-app__menu"
+        style={{
+          visibility: show ? "visible" : "hidden", 
+          opacity: show ? 1 :0,
+          transition: show ? "visibility 0s, opacity 0.5s linear" : "visibility 0s linear 0.5s, opacity 0.5s",
+        }}
+      >
         <div className="nav-app__logo"><img  src={logo}/></div>
         <div  className="nav-app__options">
           <nav>
@@ -25,7 +30,7 @@ export default function NavApp(){
           </nav>
         </div>
       </section>
-      }    
+       
     </div>
   );
 }

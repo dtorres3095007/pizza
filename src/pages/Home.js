@@ -18,6 +18,7 @@ import FloatingActionBtn from "../components/FloatingActionBtn";
 import Modal from "../components/Modal";
 import AddSale from "../containers/AddSale";
 import Empty from "../components/Empty";
+import Information from "../components/Information";
 
 function Home({pizzaSelect, changeSelectPizza}){
   const [total, setTotal] = useState(0);
@@ -27,11 +28,13 @@ function Home({pizzaSelect, changeSelectPizza}){
   const [modalConfirm, setModalConfirm] = useState(false);
   const [modalDetail, setModalDetail] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [information, setInformation] = useState({pizza : 0, client :0, sales : 0});
   const [reset, setReset] = useState([]);
 
   useEffect(() => {
     getPizza();
     getSale();
+ 
   },[]);
 
   const getPizza = async ()=>{
@@ -53,6 +56,18 @@ function Home({pizzaSelect, changeSelectPizza}){
       if (estado === 200) {
         setSale(resp);
         calculateValueSale(resp);
+        getInformation();
+      } else {
+        showMessage.fire({ icon: "info", title: "Error al cargar las ventas"});
+      }});
+  };
+
+  const getInformation = async ()=>{
+    setIsLoading(true);
+    getSendData("/sale/information","GET",null, async (error, estado, resp) => {
+      setIsLoading(false);
+      if (estado === 200) {
+        setInformation(resp);
       } else {
         showMessage.fire({ icon: "info", title: "Error al cargar las ventas"});
       }});
@@ -111,10 +126,10 @@ function Home({pizzaSelect, changeSelectPizza}){
 
   return(
     <div className="body">
+      <Information information={information}/>
       {isLoading && <Loading/>}
       <header className="body__head">
         <Header />
-
       </header>
       <nav className="body__nav">
         <Nav />

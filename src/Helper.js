@@ -211,7 +211,7 @@ export function DataIngredients (){
 
 export const isCheck = (url, backgroundColor = "#FFF1D1", color = "#6D7278") => {
   let currentUrl = window.location.pathname.split("/")[1];
-  return (url == currentUrl ? { backgroundColor, color } : {});
+  return (url == currentUrl ? { backgroundColor, color, borderRadius : 10, } : {});
 };
 
 export const moveContentScroll = (classN) =>{
