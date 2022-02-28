@@ -17,6 +17,7 @@
     border: 1px solid rgb(236, 235, 235);
     border-radius: 20px;
     grid-template-columns: 150px 250px;
+    position: relative;
     
     .pizza__image{
         width: 100%;
@@ -59,8 +60,60 @@
             font-weight: bold;
             font-size: 20px;
         }
+
+        .pizza__check{
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 30px;
+            width: 30px;
+            padding: 0;
+            border: 0;
+            z-index: 5;
+            background-color: transparent;
+
+            img{
+                width: 100%;
+                height: 100%;
+            }
+        }
     }
 
+    .pizza__detail{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.8);
+        color: white;
+        text-align: center;
+        border-radius: 20px;
+        visibility: hidden;
+        opacity: 0;
+  
+        transition: visibility 0s linear 0.5s, opacity 0.5s;
+
+        .pizza__title{
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .pizza__ingredients{
+            overflow: hidden;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        
+    }
+    
+}
+.pizza:hover{
+
+    .pizza__detail{
+        visibility: visible;
+        opacity: 1;
+        transition: visibility 0s, opacity 0.5s linear;
+    }
 }
 
 @media (max-width: 700px) {

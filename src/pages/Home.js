@@ -25,6 +25,7 @@ function Home({pizzaSelect, changeSelectPizza}){
   const [dataPizza, setDatapizza] = useState([]);
   const [dataSale, setSale] = useState([]);
   const [modalConfirm, setModalConfirm] = useState(false);
+  const [modalDetail, setModalDetail] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [reset, setReset] = useState([]);
 
@@ -128,10 +129,12 @@ function Home({pizzaSelect, changeSelectPizza}){
               return (
                 <Pizza 
                   key={i} 
+                  id={id}
                   description={description} 
                   image={image} 
                   name={name} 
                   price={price}
+                  openModal={()=> setModalDetail(true)}
                   callback={(setCheck,check)=>{
                     addPizzaBuy({ name, price, id, i, image});
                     setCheck(!check);
@@ -196,6 +199,18 @@ function Home({pizzaSelect, changeSelectPizza}){
           />;
         }} 
         open={modalConfirm}
+      />
+      <Modal 
+        title="Detalle Pizza" 
+        callback={()=> setModalDetail(false)} 
+        container={()=>{
+          return (
+            <div>
+              Detalle Pizza
+            </div>
+          );
+        }} 
+        open={modalDetail}
       />
       <NavApp/>
     </div>
